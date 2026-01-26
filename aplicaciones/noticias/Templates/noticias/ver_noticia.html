@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+
+{% block contenido %}
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-md-8 noticia d-flex flex-column">
+                <div>
+                    {% for categoris in noticia.categorias.all %}
+                        <a href="#" class="badge bg-primary">{{ categoris }}</a>
+                    {% endfor %}
+                </div>
+                
+                <div class=" titulo-noticia"><p>{{noticia.titulo}}</p></div>
+                <p class="mb-4 ">
+                    <strong>{{noticia.autor.username}}</strong> | 9. sep 2023
+                </p>
+                <div class=" ck-content">
+                    {{ noticia.contenido|safe }}
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-4 recientes">
+                <div class="cabecera">
+                    <p>Noticias Recientes</p>
+                </div>
+ 
+                <div class="noticia-reciente d-flex mb-3">
+                    <div class="otras-noticias me-2">
+                        <img src="https://cdn.ygorganization.com/2025/09/DedicationInsideMe-1024x770.jpg" alt="Noticia" class="img-fluid rounded" />
+                    </div>
+                    <div class="texto">
+                        <p class="titulo mb-1">Renew Yourself With “Dedicated Gaia the Fierce Knight”! [RD/ORP3]</p>
+                        <p class="fecha mb-0">September 9, 2025</p>
+                    </div>
+                </div>
+
+                <div class="noticia-reciente d-flex mb-3">
+                    <div class="otras-noticias me-2">
+                        <img src="https://cdn.ygorganization.com/2025/09/DOOD-BoosterEN.png" alt="Noticia" class="img-fluid rounded" />
+                    </div>
+                    <div class="texto">
+                        <p class="titulo mb-1">Renew Yourself With “Dedicated Gaia the Fierce Knight”! [RD/ORP3]</p>
+                        <p class="fecha mb-0">September 9, 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% if messages%}
+    {% for message in messages%}
+        <p>{{message}}</p>
+    {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  <div class="alert alert-danger">
+    {% for error in form.errors.values %}
+      {% for e in error %}
+        <p>{{ e }}</p>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Login</button>
+</form>
