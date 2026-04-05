@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
+  <!--Esta es normalmente la imagen y debajo esta el boton para pantallas pequeñas-->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{%url 'inicio'%}">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -39,7 +40,7 @@
               <hr class="dropdown-divider">
             </li>
             {% if user.tipo == 'editor' %}         
-            <li><a class="dropdown-item" href="#">Ver mis noticias</a></li>
+            <li><a class="dropdown-item" href="{% url 'noticias:noticias_editor'%}">Ver mis noticias</a></li>
             <li><a class="dropdown-item" href="{% url 'noticias:crear-noticia' %}">Crear noticia</a></li>
             <li>
               <hr class="dropdown-divider">
@@ -57,7 +58,7 @@
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'login'%}">Iniciar Sesion</a>
+          <a class="nav-link active w-50" title="Iniciar Sesion" aria-current="page" href="{% url 'login'%}?next={{ request.path }}"><i class="bi bi-box-arrow-in-right"></i></a>
         </li>
         {% endif %}
       </ul>

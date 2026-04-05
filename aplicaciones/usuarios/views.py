@@ -29,13 +29,8 @@ class Login(LoginView):
     template_name = 'registration/login.html'
 
     def get_success_url(self):
-        r = random.randint(1,10)
+        return self.request.GET.get('next') or reverse_lazy('inicio')
 
-        if r<6:
-            return reverse_lazy('inicio')
-        else:
-            return reverse_lazy('noticias:crear-noticia')
-        
     def form_invalid(self, form):
         messages.error(self.request, 'Usuario o contraseña incorrecto')
 
@@ -51,6 +46,9 @@ class UsuarioCreateView(CreateView):
     form_class = UsuarioForm
     success_url = reverse_lazy('inicio')
     template_name = "registro.html"
+
+    def get_success_url(self):
+        return self.request.GET.get('next') or reverse_lazy('inicio')
 
     def form_valid(self, form):
         usuario = super().form_valid(form)

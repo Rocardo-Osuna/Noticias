@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import Http404 
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView, TemplateView
+from django.views import View
 from .models import Noticia
 from .forms import NoticiaForm
 from aplicaciones.usuarios.views import RolMixin
@@ -15,7 +16,7 @@ class InicioListView(ListView):
     template_name = "noticias/index.html"
 
     def get_queryset(self):
-        return self.model.objects.order_by('-fecha', '-id')
+        return self.model.objects.filter(activo=True).order_by('-fecha', '-id')
 
 
 
@@ -59,6 +60,28 @@ class NoticiaUpdateView(UpdateView):
 
     
 
+class NoticiasEditorListView(LoginRequiredMixin, RolMixin, ListView):
+    model = Noticia
+    context_object_name = "noticias"
+    template_name = "noticias/noticias_editor.html"
+    tipo_requerido = 'editor'
 
-class Prueba(TemplateView):
-    template_name = "noticias/prueba.html"
+    def get_queryset(self):
+        return self.model.objects.filter(autor=self.request.user).order_by('-fecha', '-id')
+
+
+class EliminarNoticia(LoginRequiredMixin, RolMixin):
+    model = Noticia
+    tipo_requerido = 'editor'
+
+    def get_queryset(self):
+        return self.model.objects.filter(autor=self.request.user)
+
+    
+class RestaurarNoticia(LoginRequiredMixin, RolMixin):
+    model = Noticia
+    tipo_requerido = 'editor'
+
+    def get_queryset(self):
+        return self.model.objects.filter(autor=self.request.user)
+

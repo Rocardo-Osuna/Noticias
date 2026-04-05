@@ -25,6 +25,7 @@ class Usuario(AbstractUser):
     def __str__(self):
         return f'{self.username} - {self.nombre or ""} {self.apellidoP or ""} {self.apellidoM or ""}'
     
+    #Esto solo lo agregue como practica, puede eliminarse sin problema
     def clean(self):
         if self.edad is not None:
             if self.edad > 120:

@@ -10,7 +10,7 @@ class Admin(UserAdmin):
     form = UsuarioChangeForm
     add_form = UsuarioForm
 
-    list_display = ('username', 'nombre', 'apellidoP', 'apellidoM', 'edad', 'tipo')
+    list_display = ('username', 'nombre', 'apellidoP', 'apellidoM','tipo', 'date_joined')
     list_filter = ('is_active', 'tipo')
     search_fields = ('username', 'nombre', 'apellidoP', 'apellidoM')
     ordering = ('username',)
